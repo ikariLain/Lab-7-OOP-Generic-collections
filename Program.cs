@@ -84,10 +84,44 @@ namespace Lab_7___OOP_Generic_collections
             Console.WriteLine($"Items left in stack = {stack.Count}");
 
 
+            Console.WriteLine();
+            Console.WriteLine();
+            // Del 2 Lista 
+            
+            //Make list
+            List<Employee> employeesList = new List<Employee>() {ANNA, HÅKAN, ANDERS, THOMAS , MARIAN };
 
+            //Using any to find 
+            bool empoyeeExists = employeesList.Any(e => e.ID == "M99" && e.Name == "Ander");
 
+            if (empoyeeExists)
+            {
+                Console.WriteLine("Empoloyee2 object extists in the list");
+            }
+            else
+            {
+                Console.WriteLine("Employee2 object donsn't exist in the list");
+            }
+
+            //Using find
+            Employee firstMaleEmployee = employeesList.Find(e => e.Gender == "Male");
+
+            if(firstMaleEmployee != null)
+            {
+                firstMaleEmployee.PrintValues();
+            }
+            else
+            {
+                Console.WriteLine("No male employee found in the list");
+            }
+
+            //Using findall
+            List<Employee> allmaleEmployees = employeesList.FindAll(e => e.Gender == "Male");
+
+            foreach (var Employee in allmaleEmployees)
+            {
+                Employee.PrintValues();
+            }
         }
-
-
     }
 }
