@@ -1,127 +1,92 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
+
 namespace Lab_7___OOP_Generic_collections
 {
     internal class Program
     {
+        // Main method, the entry point of the application.
         static void Main(string[] args)
         {
-            Employee ANNA = new Employee ("F99","Anna","Female",3000);
+            // Creating instances of the Employee class with ID, Name, Gender, and Salary.
+            Employee ANNA = new Employee("F99", "Anna", "Female", 3000);
+            Employee HÅKAN = new Employee("M75", "Håkan", "Male", 2500);
+            Employee ANDERS = new Employee("M99", "Anders", "Male", 4000);
+            Employee THOMAS = new Employee("M44", "Thomas", "Male", 3400);
+            Employee MARIAN = new Employee("F77", "Marian", "Female", 5000);
 
-            Employee HÅKAN = new Employee("M75", "Håkan", "Male",2500);
-
-            Employee ANDERS = new Employee("M99", "Ander", "Male", 4000);
-
-            Employee THOMAS = new Employee("M44", "Thoms", "Male", 3400);
-
-            Employee MARIAN = new Employee("F77", "Marian", "Female", 5000); 
-
+            // Initializing a stack to store Employee objects.
             Stack<Employee> stack = new Stack<Employee>();
 
-            //Pushad alla objects i stacken
+            // Adding (pushing) each Employee object onto the stack.
             stack.Push(ANNA); 
             stack.Push(ANDERS); 
             stack.Push(ANDERS); 
             stack.Push(THOMAS); 
             stack.Push(MARIAN);
 
-            //Temporär lista
+            // Temporary list to store employees that are removed from the stack.
             List<Employee> poppedEmployeesList = new List<Employee>();
 
-            //Skriver ut alla objekt med hjälp med metoden PrintValues
+            // Displaying each employee in the stack using the PrintValues method.
             foreach (var item in stack)
             {
                 item.PrintValues();
-                Console.WriteLine($"Item left in the stack: {stack.Count} ");
+                Console.WriteLine($"Items left in the stack: {stack.Count}");
             }
 
+            // Separator for readability.
             Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - -");
 
-            Console.WriteLine("Retrive Using POP Method");
+            // Informing the user about using the Pop method to retrieve items.
+            Console.WriteLine("Retrieving Using POP Method");
 
+            // Pop each employee from the stack until it is empty, printing each as it’s removed.
             while (stack.Count > 0)
             {
-      
                 Employee poppedEmployee = stack.Pop();
                 poppedEmployee.PrintValues();
 
-                Console.WriteLine($"Antalet objekts: {stack.Count} ");
+                Console.WriteLine($"Number of items left: {stack.Count}");
 
-
-
+                // Adding the popped employee to a list for future use.
                 poppedEmployeesList.Add(poppedEmployee);
             }
 
-            Console.WriteLine("\nLägger till alla objekt igen i stacken med Push:");
+            // Adding all employees back onto the stack using Push.
+            Console.WriteLine("\nAdding all items back to the stack with Push:");
             foreach (Employee employee in poppedEmployeesList)
             {
                 stack.Push(employee);
             }
 
-            Console.WriteLine("\nskriver ut objekten");
+            // Displaying each employee in the stack again.
+            Console.WriteLine("\nDisplaying items in the stack:");
             foreach (var item in stack)
             {
                 item.PrintValues();
-                Console.WriteLine($"Antalet objekts: {stack.Count} ");
+                Console.WriteLine($"Number of items left: {stack.Count}");
             }
 
-            Console.WriteLine("Retrive ussing Peek");
+            // Using the Peek method to view the top item without removing it.
+            Console.WriteLine("Retrieve using Peek");
 
             Employee firstPeeked = stack.Peek();
             firstPeeked.PrintValues();
             Console.WriteLine($"Items left in stack = {stack.Count}");
 
-            firstPeeked =stack.Pop();
+            // Removing the top item using Pop.
+            firstPeeked = stack.Pop();
 
-            Employee secoundPeeked = stack.Peek();
-
-            secoundPeeked.PrintValues();
+            // Peeking at the next item on the stack.
+            Employee secondPeeked = stack.Peek();
+            secondPeeked.PrintValues();
             Console.WriteLine($"Items left in stack = {stack.Count}");
-
-
-            Console.WriteLine();
-            Console.WriteLine();
-            // Del 2 Lista 
-            
-            //Make list
-            List<Employee> employeesList = new List<Employee>() {ANNA, HÅKAN, ANDERS, THOMAS , MARIAN };
-
-            //Using any to find 
-            bool empoyeeExists = employeesList.Any(e => e.ID == "M99" && e.Name == "Ander");
-
-            if (empoyeeExists)
-            {
-                Console.WriteLine("Empoloyee2 object extists in the list");
-            }
-            else
-            {
-                Console.WriteLine("Employee2 object donsn't exist in the list");
-            }
-
-            //Using find
-            Employee firstMaleEmployee = employeesList.Find(e => e.Gender == "Male");
-
-            if(firstMaleEmployee != null)
-            {
-                firstMaleEmployee.PrintValues();
-            }
-            else
-            {
-                Console.WriteLine("No male employee found in the list");
-            }
-
-            //Using findall
-            List<Employee> allmaleEmployees = employeesList.FindAll(e => e.Gender == "Male");
-
-            foreach (var Employee in allmaleEmployees)
-            {
-                Employee.PrintValues();
-            }
         }
     }
 }
